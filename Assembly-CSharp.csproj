@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{85BE69B8-BEE0-9AFB-0ABA-F57AF6863163}</ProjectGuid>
+    <ProjectGuid>{38C8B432-CE71-630C-D696-FFFAC6B7AD39}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -53,17 +53,17 @@
     <UnityVersion>2020.3.25f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\script\Start\StartScenesManger.cs" />
-    <Compile Include="Assets\script\CameraSetting.cs" />
-    <Compile Include="Assets\Kovu\EventSystems\Scripts\DefaultDictionary.cs" />
-    <Compile Include="Assets\Kovu\EventSystems\Scripts\PointerEventTrigger.cs" />
     <Compile Include="Assets\Kovu\EventSystems\Scripts\FilteredEventTrigger.cs" />
-    <Compile Include="Assets\Kovu\CameraSystems\Scripts\Focuser.cs" />
-    <Compile Include="Assets\Kovu\EventSystems\Scripts\PointerControlPanel.cs" />
-    <Compile Include="Assets\Kovu\CameraSystems\Scripts\CameraController.cs" />
-    <Compile Include="Assets\Kovu\EventSystems\Scripts\ButtonMask.cs" />
     <Compile Include="Assets\Kovu\EventSystems\Scripts\EventFilter.cs" />
+    <Compile Include="Assets\Kovu\CameraSystems\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Kovu\EventSystems\Scripts\PointerEventTrigger.cs" />
+    <Compile Include="Assets\Kovu\CameraSystems\Scripts\Focuser.cs" />
     <Compile Include="Assets\Kovu\EventSystems\Scripts\ButtonEventFilter.cs" />
+    <Compile Include="Assets\script\CameraSetting.cs" />
+    <Compile Include="Assets\script\Start\StartScenesManger.cs" />
+    <Compile Include="Assets\Kovu\EventSystems\Scripts\ButtonMask.cs" />
+    <Compile Include="Assets\Kovu\EventSystems\Scripts\DefaultDictionary.cs" />
+    <Compile Include="Assets\Kovu\EventSystems\Scripts\PointerControlPanel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
