@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{C53BC68A-2D56-0B11-4805-2F07D6295DFB}</ProjectGuid>
+    <ProjectGuid>{85BE69B8-BEE0-9AFB-0ABA-F57AF6863163}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -53,7 +53,17 @@
     <UnityVersion>2020.3.25f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\script\StartScenesManger.cs" />
+    <Compile Include="Assets\script\Start\StartScenesManger.cs" />
+    <Compile Include="Assets\script\CameraSetting.cs" />
+    <Compile Include="Assets\Kovu\EventSystems\Scripts\DefaultDictionary.cs" />
+    <Compile Include="Assets\Kovu\EventSystems\Scripts\PointerEventTrigger.cs" />
+    <Compile Include="Assets\Kovu\EventSystems\Scripts\FilteredEventTrigger.cs" />
+    <Compile Include="Assets\Kovu\CameraSystems\Scripts\Focuser.cs" />
+    <Compile Include="Assets\Kovu\EventSystems\Scripts\PointerControlPanel.cs" />
+    <Compile Include="Assets\Kovu\CameraSystems\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Kovu\EventSystems\Scripts\ButtonMask.cs" />
+    <Compile Include="Assets\Kovu\EventSystems\Scripts\EventFilter.cs" />
+    <Compile Include="Assets\Kovu\EventSystems\Scripts\ButtonEventFilter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
