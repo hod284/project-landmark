@@ -15,7 +15,7 @@ public class player : MonoBehaviour
 
     private void Awake()
     {
-        // 3D Ä«¸Ş¶ó fov ¸ÂÃß±â
+        // 3D ì¹´ë©”ë¼ fov ë§ì¶”ê¸°
         var width = Screen.width / 2;
         var angle = Mathf.Atan((distance / width)) * Mathf.Rad2Deg;
         Camera.main.fieldOfView = angle * 2;
@@ -50,14 +50,14 @@ public class player : MonoBehaviour
                 var curTouchAPos = Input.GetTouch(0).position;
                 var curTouchBPos = Input.GetTouch(1).position;
                 var deltaDistance = Vector2.Distance(Normalize(curTouchAPos), Normalize(curTouchBPos))- Vector2.Distance(Normalize(prevTouchAPos), Normalize(prevTouchBPos));
-                devicex += deltaDistance * zoomspeed;
-                devicey += deltaDistance * zoomspeed;
+                devicex -= deltaDistance * zoomspeed;
+                devicey -= deltaDistance * zoomspeed;
                 Camera.main.fieldOfView = (Mathf.Atan((distance / devicex)) * Mathf.Rad2Deg)*2;
             }
 
         }
     }
-    // È­¸éÀÇ Å©±â°¡ ÇÚµåÆù ¸¶´Ù ´Ù¸£±â ¶§¹®¿¡ ½ºÅ©¸°ÁÂÇ¥¸¦ ¹ŞÀºµÚ -1°ú 1ÀÇ °ªÀ¸·Î Á¤±ÔÈ­
+    // í™”ë©´ì˜ í¬ê¸°ê°€ í•¸ë“œí° ë§ˆë‹¤ ë‹¤ë¥´ê¸° ë•Œë¬¸ì— ìŠ¤í¬ë¦°ì¢Œí‘œë¥¼ ë°›ì€ë’¤ -1ê³¼ 1ì˜ ê°’ìœ¼ë¡œ ì •ê·œí™”
     private Vector2 Normalize(Vector2 position)
     {
         var normlizedPos = new Vector2(
