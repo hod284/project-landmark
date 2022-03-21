@@ -15,7 +15,7 @@ public class player : MonoBehaviour
 
     private void Awake()
     {
-        // 3D ì¹´ë©”ë¼ fov ë§ì¶”ê¸°
+        // 3D Ä«¸Ş¶ó fov ¸ÂÃß±â
         var width = Screen.width / 2;
         var angle = Mathf.Atan((distance / width)) * Mathf.Rad2Deg;
         Camera.main.fieldOfView = angle * 2;
@@ -32,17 +32,17 @@ public class player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       var currentx = Mathf.Abs(Camera.main.transform.transform.localPosition.x) + devicex;
-       var  currenty = Mathf.Abs(Camera.main.transform.transform.localPosition.y) + devicey;
 
         if (buildmodeornot == buildmodeornot.nobuild)
         {
-            if (limitex > currentx && -limitex < -currentx && limitey > currenty && -limitey < -currenty&&Input.touchCount==1)
+            var currentx = Camera.main.transform.transform.localPosition.x > 0 ? Camera.main.transform.transform.localPosition.x + devicex: Camera.main.transform.transform.localPosition.x - devicex;
+            var currenty = Camera.main.transform.transform.localPosition.y > 0 ? Camera.main.transform.transform.localPosition.y + devicey : Camera.main.transform.transform.localPosition.y - devicey;
+            if (Mathf.Abs(limitex) > currentx && -Mathf.Abs(limitex) < currentx && Mathf.Abs(limitey) > currenty && -Mathf.Abs(limitey) < currenty&&Input.touchCount==1)
             {
                 var moveAmount = new Vector3(Camera.main.transform.localPosition.x +Input.GetTouch(0).deltaPosition.x, Camera.main.transform.localPosition.y + Input.GetTouch(0).deltaPosition.y, Camera.main.transform.localPosition.z);
                 Camera.main.transform.localPosition = Vector3.Lerp(Camera.main.transform.localPosition, moveAmount, Time.deltaTime / 10.0f);
             }
-            if (devicex < Screen.width/2 && devicex > (Screen.width / 2)-50 && Input.touchCount == 2)
+            if (devicex < Screen.width/2 && devicex > Screen.width / 2-50 && Input.touchCount == 2)
             {
 
                 var prevTouchAPos = Input.GetTouch(0).position - Input.GetTouch(0).deltaPosition;
@@ -57,7 +57,7 @@ public class player : MonoBehaviour
 
         }
     }
-    // í™”ë©´ì˜ í¬ê¸°ê°€ í•¸ë“œí° ë§ˆë‹¤ ë‹¤ë¥´ê¸° ë•Œë¬¸ì— ìŠ¤í¬ë¦°ì¢Œí‘œë¥¼ ë°›ì€ë’¤ -1ê³¼ 1ì˜ ê°’ìœ¼ë¡œ ì •ê·œí™”
+    // È­¸éÀÇ Å©±â°¡ ÇÚµåÆù ¸¶´Ù ´Ù¸£±â ¶§¹®¿¡ ½ºÅ©¸°ÁÂÇ¥¸¦ ¹ŞÀºµÚ -1°ú 1ÀÇ °ªÀ¸·Î Á¤±ÔÈ­
     private Vector2 Normalize(Vector2 position)
     {
         var normlizedPos = new Vector2(
