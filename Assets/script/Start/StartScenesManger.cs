@@ -9,6 +9,12 @@ public class StartScenesManger : MonoBehaviour
     public float distance;
     private float degree=0.0f;
     public Slider loadingbar;
+    public float frustumWidth;
+    public float frustumHeight;
+    public GameObject flight;
+    private float movex;
+
+
     private void Awake()
     {
         int deviceWidth = Screen.width;
@@ -17,9 +23,10 @@ public class StartScenesManger : MonoBehaviour
         // UI 카메라 사이즈 맞추기
         uicamera.orthographicSize = (deviceHeight / (deviceWidth / 16.0F)) / 9.0F;
         // 3D 카메라 fov 맞추기
-        var canvus = FindObjectOfType<Canvas>();
-        var width = FindObjectOfType<Canvas>().GetComponent<RectTransform>().rect.width / 2;
-        var angle = Mathf.Atan((distance / width)) * Mathf.Rad2Deg;
+        // 프로스터(절두체 컬링)에대한 카메라 해상도 대응
+        frustumWidth = frustumHeight * camera.aspect;
+        frustumHeight = frustumWidth / camera.aspect;
+        var angle =  Mathf.Atan(frustumHeight * 0.5f / distance) * Mathf.Rad2Deg;
         camera.fieldOfView = angle * 2;
     }
     private void Start()
@@ -34,6 +41,7 @@ public class StartScenesManger : MonoBehaviour
         if (degree >= 360)
             degree = 0;
         RenderSettings.skybox.SetFloat("_Rotation", degree);
+        
     }
 
     public void Changescence()

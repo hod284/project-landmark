@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{38C8B432-CE71-630C-D696-FFFAC6B7AD39}</ProjectGuid>
+    <ProjectGuid>{C53BC68A-2D56-0B11-4805-2F07D6295DFB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -54,14 +54,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Kovu\EventSystems\Scripts\FilteredEventTrigger.cs" />
+    <Compile Include="Assets\script\player.cs" />
+    <Compile Include="Assets\script\Tilemanger.cs" />
     <Compile Include="Assets\Kovu\EventSystems\Scripts\EventFilter.cs" />
+    <Compile Include="Assets\script\EnumClass.cs" />
     <Compile Include="Assets\Kovu\CameraSystems\Scripts\CameraController.cs" />
     <Compile Include="Assets\Kovu\EventSystems\Scripts\PointerEventTrigger.cs" />
+    <Compile Include="Assets\script\UIscript.cs" />
+    <Compile Include="Assets\script\Load.cs" />
     <Compile Include="Assets\Kovu\CameraSystems\Scripts\Focuser.cs" />
     <Compile Include="Assets\Kovu\EventSystems\Scripts\ButtonEventFilter.cs" />
-    <Compile Include="Assets\script\CameraSetting.cs" />
+    <Compile Include="Assets\script\building.cs" />
     <Compile Include="Assets\script\Start\StartScenesManger.cs" />
     <Compile Include="Assets\Kovu\EventSystems\Scripts\ButtonMask.cs" />
+    <Compile Include="Assets\script\SaveandLoadManger.cs" />
     <Compile Include="Assets\Kovu\EventSystems\Scripts\DefaultDictionary.cs" />
     <Compile Include="Assets\Kovu\EventSystems\Scripts\PointerControlPanel.cs" />
   </ItemGroup>
@@ -76,6 +82,7 @@
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\Free Stylized Skybox\ReadMe.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
@@ -659,8 +666,14 @@
     <Reference Include="System.Xml.Serialization">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.25f1\Editor\Data\NetStandard\compat\2.0.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.2D.Tilemap.Extras">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Tilemap.Extras.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Tilemap.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
@@ -685,6 +698,9 @@
     </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Tilemap.Extras.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Tilemap.Extras.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
