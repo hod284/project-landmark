@@ -21,5 +21,15 @@ namespace Enumspace
         build,
         nobuild
     }
-    
+    public enum selectmodel
+    {
+        select,
+        noselect
+    }
+    public enum tileuse
+    {
+        use,
+        notuse
+
+    }
 }
