@@ -463,7 +463,7 @@ Camera:
     height: 1
   near clip plane: 50
   far clip plane: 1000
-  field of view: 22
+  field of view: 32.8
   orthographic: 0
   orthographic size: 4.25
   m_Depth: -1
@@ -488,13 +488,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 735728303}
-  m_LocalRotation: {x: 0.29695055, y: -0, z: -0, w: 0.9548929}
-  m_LocalPosition: {x: -84, y: 481, z: -408}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 247.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 34.549, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &735728307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -509,8 +509,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapcoliderparent: {fileID: 1045864700}
   tilecolider: {fileID: 6734859783606175568, guid: 91a916815ccc39b47aec573915b68c45, type: 3}
-  xcolidercount: 10
-  zcolidercount: 10
+  xcolidercount: 0
+  zcolidercount: 0
   limitex: 0
   limitey: 0
   zoomspeed: 0

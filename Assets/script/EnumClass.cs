@@ -21,10 +21,10 @@ namespace Enumspace
         build,
         nobuild
     }
-    public enum selectmodel
+    public enum selectbuilding
     {
-        select,
-        noselect
+        notselect,
+        select
     }
     public enum tileuse
     {
