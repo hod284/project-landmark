@@ -507,10 +507,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bc4db7245782324f99436a1a12f25de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapcoliderparent: {fileID: 1045864700}
-  tilecolider: {fileID: 6734859783606175568, guid: 91a916815ccc39b47aec573915b68c45, type: 3}
-  xcolidercount: 0
-  zcolidercount: 0
   limitex: 0
   limitey: 0
   zoomspeed: 0
@@ -523,6 +519,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1045864702}
+  - component: {fileID: 1045864701}
   m_Layer: 0
   m_Name: map
   m_TagString: Untagged
@@ -530,6 +527,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1045864701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045864700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd904fa3bbcc4f94bb924e47da65e47a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilecolider: {fileID: 0}
+  xcolidercount: 0
+  zcolidercount: 0
 --- !u!4 &1045864702
 Transform:
   m_ObjectHideFlags: 0

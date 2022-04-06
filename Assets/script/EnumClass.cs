@@ -29,6 +29,7 @@ namespace Enumspace
     public enum tileuse
     {
         use,
+        willuse,
         notuse
 
     }

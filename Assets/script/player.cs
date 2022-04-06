@@ -2,15 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Enumspace;
-
+using System.Text;
 public class player : MonoBehaviour
 {
-    public GameObject mapcoliderparent;
-    public GameObject tilecolider;
-    [SerializeField]
-    private int xcolidercount;
-    [SerializeField]
-    private int zcolidercount;
     public float limitex;
     public float limitey;
     public float zoomspeed;
@@ -42,45 +36,6 @@ public class player : MonoBehaviour
     void Start()
     {
         buildmodeornot = buildmodeornot.nobuild;
-        for (int i = 0; i < xcolidercount; i++)
-        {
-            var x = 0.0f;
-            if (i < xcolidercount / 2)
-            {
-                if (i == 0)
-                    x = -0.5f;
-                else
-                    x = -(i + 0.5f);
-            }
-            else
-            {
-                if (i == xcolidercount / 2 - 1)
-                    x = 0.5f;
-                else
-                    x = (i - xcolidercount / 2) + 0.5f;
-            }
-            for (int j = 0; j < zcolidercount; j++)
-            {
-                var z = 0.0f;
-                if (j < zcolidercount / 2)
-                {
-                    if (j == 0)
-                        z = -0.5f;
-                    else
-                        z = -(j + 0.5f);
-                }
-                else
-                {
-                    if (j == zcolidercount / 2 - 1)
-                        z = 0.5f;
-                    else
-                        z = (j - zcolidercount / 2) + 0.5f;
-                }
-                var mapcolider= Instantiate(tilecolider, new Vector3(x, 0, z), Quaternion.identity, mapcoliderparent.transform);
-            }
-        }
-
-
     }
 
     // Update is called once per frame
@@ -91,7 +46,7 @@ public class player : MonoBehaviour
             if (Mathf.Abs(limitex) > currentx && -Mathf.Abs(limitex) < currentx && Mathf.Abs(limitey) > currenty && -Mathf.Abs(limitey) < currenty && Input.touchCount == 1)
             {
                 var moveAmount = new Vector3(Camera.main.transform.localPosition.x + Input.GetTouch(0).deltaPosition.x, Camera.main.transform.localPosition.y + Input.GetTouch(0).deltaPosition.y, Camera.main.transform.localPosition.z);
-                Camera.main.transform.localPosition = Vector3.Lerp(Camera.main.transform.localPosition, moveAmount, Time.deltaTime / 10.0f);
+                Camera.main.transform.localPosition = Vector3.Lerp(Camera.main.transform.   localPosition, moveAmount, Time.deltaTime / 10.0f);
             }
             if (Camera.main.fieldOfView <= standangle && Camera.main.fieldOfView > standangle - 50 && Input.touchCount == 2)
             {
