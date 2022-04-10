@@ -58,7 +58,7 @@ public class player : MonoBehaviour
                 var deltaDistance = Vector2.Distance(Normalize(curTouchAPos), Normalize(curTouchBPos)) - Vector2.Distance(Normalize(prevTouchAPos), Normalize(prevTouchBPos));
                 Camera.main.fieldOfView -= deltaDistance;
             }
-     
+          
     }
     // 화면의 크기가 핸드폰 마다 다르기 때문에 스크린좌표를 받은뒤 -1과 1의 값으로 정규화
     private Vector2 Normalize(Vector2 position)

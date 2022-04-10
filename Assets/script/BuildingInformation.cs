@@ -10,6 +10,7 @@ public class BuildingInformation : MonoBehaviour
     // Start is called before the first frame update
     void Awake ()
     {
+     
         // this.gameObject.SetActive(false);
         //  selectornot = selectbuilding.notselect;
     }
@@ -27,24 +28,28 @@ public class BuildingInformation : MonoBehaviour
             {
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
+                Debug.DrawRay(ray.origin, ray.direction * 10f, Color.red, 5f);
                 Physics.Raycast(ray, out hit);
                 var hitgameobject = hit.collider;
-              
-                if (hitgameobject!=null&&hitgameobject.GetComponent<Tile>().tilestate != tileuse.use)
+                Tile tile;
+                hitgameobject.TryGetComponent<Tile>(out tile);
+                BuildingInformation information;
+                hitgameobject.TryGetComponent<BuildingInformation>(out information);
+                if (hitgameobject!=null&&tile!= null)
                 {
                     for (int i = pointsx; i < pointex; i++)
                     {
                         for (int j = pointsz; j < pointez; j++)
                         {
-                            var tile = GameObject.Find(i.ToString() + j.ToString());
-                            tile.GetComponent<Tile>().tilestate = tileuse.notuse;
+                            var tiles = GameObject.Find(i.ToString() + j.ToString());
+                            tiles.GetComponent<Tile>().tilestate = tileuse.notuse;
                         }
                     }
                     pointsx = 0;
                     pointsz = 0;
                     pointex = 0;
                     pointez = 0;
-                    if (xmapcolidercount != 0 && zmapcolidercount != 0)
+                    if (xmapcolidercount != 0 && zmapcolidercount != 0&& tile.tilestate != tileuse.use)
                     {
                         var colidername = hitgameobject.name;
                         var locationx = 0.0f;
@@ -144,21 +149,21 @@ public class BuildingInformation : MonoBehaviour
                     {
                         for (int j = pointsz; j < pointez; j++)
                         {
-                            var tile = GameObject.Find(i.ToString() + j.ToString());
-                            tile.GetComponent<Tile>().tilestate = tileuse.willuse;
+                            var tiles = GameObject.Find(i.ToString() + j.ToString());
+                            tiles.GetComponent<Tile>().tilestate = tileuse.willuse;
                         }
                     }
                 }
-                else
-                {
+                else if (hitgameobject != null &&information!=null)
+                    {
                     if (pointsz != 0 && pointez != 0 && pointsx != 0 && pointex != 0)
                     {
                         for (int i = pointsx; i < pointex; i++)
                         {
                             for (int j = pointsz; j < pointez; j++)
                             {
-                                var tile = GameObject.Find(i.ToString() + j.ToString());
-                                tile.GetComponent<Tile>().tilestate = tileuse.notuse;
+                                var tiles = GameObject.Find(i.ToString() + j.ToString());
+                                tiles.GetComponent<Tile>().tilestate = tileuse.notuse;
                             }
                         }
                         pointsx = 0;
@@ -166,11 +171,15 @@ public class BuildingInformation : MonoBehaviour
                         pointex = 0;
                         pointez = 0;
                     }
-                    Vector3 pos = Input.mousePosition;
-                    pos.z = Camera.main.farClipPlane;
-                    //마우스포인터에 따라 오브젝트를 움직일때 마우스의 포지션을 월드로 바꾸어 주어야 할 필요가 있음 마우스 포인트 xy밖에 안나오며 이때 z 포지션을 설정해주어야 한다
-                    // z포지션은 카메라와 오브젝트 사이의 거리를 설정한거라고 생각해주면 됨 만약z를 설정 해주지 않으면 오브젝트가 마우스 포인터를 안따라간다
-                    transform.position = Camera.main.ScreenToWorldPoint(pos);
+                    if (information.selectornot == selectbuilding.select)
+                    {
+                        Vector3 pos = Input.mousePosition;
+                        pos.z = Camera.main.farClipPlane;
+                        //마우스포인터에 따라 오브젝트를 움직일때 마우스의 포지션을 월드로 바꾸어 주어야 할 필요가 있음 마우스 포인트 xy밖에 안나오며 이때 z 포지션을 설정해주어야 한다
+                        // z포지션은 카메라와 오브젝트 사이의 거리를 설정한거라고 생각해주면 됨 만약z를 설정 해주지 않으면 오브젝트가 마우스 포인터를 안따라간다
+                        var position = Camera.main.ScreenToWorldPoint(pos);
+                        transform.position = position;
+                    }
                 }
             }
         }
