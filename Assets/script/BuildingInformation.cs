@@ -11,10 +11,21 @@ public class BuildingInformation : MonoBehaviour
     public Material canbuilt;
     public Material donbuilt;
     public Material original;
+    [HideInInspector]
+    public float leftx ;
+    [HideInInspector]
+    public float rightx ;
+    [HideInInspector]
+    public float leftz ;
+    [HideInInspector]
+    public float rightz ;
     // Start is called before the first frame update
     void Awake ()
     {
-     
+        leftx = 0.0f;
+        rightx = 0.0f;
+        leftz = 0.0f;
+        rightz = 0.0f;
         this.gameObject.SetActive(false);
         selectornot = selectbuilding.notselect;
     }
@@ -27,10 +38,6 @@ public class BuildingInformation : MonoBehaviour
             transform.SetParent(cube.transform);
             transform.position = Vector3.zero;
             cube.transform.localScale = new Vector3(xmapcolidercount, 1, zmapcolidercount);
-            var leftx = 0.0f;
-            var rightx = 0.0f;
-            var leftz = 0.0f;
-            var rightz = 0.0f;
             if (Input.GetMouseButton(0))
             {
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -51,7 +58,7 @@ public class BuildingInformation : MonoBehaviour
                     else
                         inthetile = false;
                 }
-                if (hitgameobject != null )
+                if (hitgameobject != null && inthetile)
                 {
                     Tile tile;
                     hitgameobject.TryGetComponent<Tile>(out tile);
@@ -125,9 +132,6 @@ public class BuildingInformation : MonoBehaviour
                                         leftz = (zmapcolidercount-1) / 2;
                                         rightz = (zmapcolidercount-1) / 2;
                                     }
-                                    var intz = 0;
-                                    int.TryParse(z.ToString(), out intz);
-                                    
                                     locationz = ((Mathf.Abs(hitgameobject.transform.position.z) - leftz) + (Mathf.Abs(hitgameobject.transform.position.z) + rightz)) / 2;
                                 }
                                 else if (z == tilemapmanger.zcolidercount - 1 || z == 0)
