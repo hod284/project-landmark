@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
+using Enumspace;
 public class Tilemanger : MonoBehaviour
 {
     public GameObject tilecolider;
+    public GameObject block;
     public int xcolidercount;
     public int zcolidercount;
     // Start is called before the first frame update
@@ -39,9 +41,31 @@ public class Tilemanger : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void monsterroadselect()
     {
-        
+        StartCoroutine("enumerator");
+      
+    }
+    public void Resettile()
+    {
+        var child = GetComponentsInChildren<Tile>();
+        for (int i = 0; i < child.Length; i++)
+        {
+            if (child[i].bstate == buildingstate.use)
+                child[i].bstate = buildingstate.notuse;
+            
+        }
+    }
+    IEnumerator enumerator()
+    {
+        var child = GetComponentsInChildren<Tile>();
+        for (int i = 0; i < child.Length; i++)
+        {
+            if (child[i].mroad == monsterroad.use)
+            {
+                Instantiate(block, child[i].transform);
+                yield return  new WaitForSeconds(0.5f);
+            }
+        }
     }
 }

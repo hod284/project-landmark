@@ -22,7 +22,7 @@ public class SaveandLoadManger : MonoBehaviour
 
                 tiledata t = new tiledata();
                 t.tilename = child[i].name;
-                t.tileuse = child[i].tilestate;
+                t.tileuse = child[i].bstate;
                 File.WriteAllText(Application.dataPath + "/data.json", JsonUtility.ToJson(t));
             }
         }
@@ -39,7 +39,7 @@ public class SaveandLoadManger : MonoBehaviour
     public class tiledata
     {
         public string tilename;
-        public tileuse tileuse;
+        public buildingstate tileuse;
     }
 
 }

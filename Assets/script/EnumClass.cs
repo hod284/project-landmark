@@ -3,33 +3,28 @@ namespace Enumspace
 {
    enum tilemapspace
    {
-       road,
-       house,
-       store,
-       industry,
-       landmark,
-       police,
-       firefighter,
-       powerplan,
-       hosipital,
-       playground,
-       Trandpotation,
-       learningplace
+       gun,
+       powergun,
+       laser,
+       ice,
+       rocket,
+       threerocket,
+       elect
    }
-    enum buildmodeornot
-    {
-        build,
-        nobuild
-    }
     public enum selectbuilding
     {
         notselect,
         select
     }
-    public enum tileuse
+    public enum monsterroad
     {
         use,
-        willuse,
+        notuse
+
+    }
+    public enum buildingstate
+    {
+        use,
         notuse
 
     }

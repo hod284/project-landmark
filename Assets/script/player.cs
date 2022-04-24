@@ -9,10 +9,11 @@ public class player : MonoBehaviour
     public float limitey;
     public float zoomspeed;
     float devicex;
+    [SerializeField]
     float distance;
     float  devicey;
     float standangle;
-    buildmodeornot buildmodeornot;
+
 
     private void Awake()
     {
@@ -22,21 +23,16 @@ public class player : MonoBehaviour
         //fov를 맞추어 주어야 하는데 삼각함수에 tan를 구하는 공삭울 이용한다 거리를 밑면 직교투영의 size를 높이로 한다
         //orthographicSize는 카메라의 사이즈를 절반을표현하기 때문에 먼저 카메라의 크기에 따라 직교투영의 사이즈를 맞춘뒤에 그것을 높이로 이용하여 앵글을 구하면 끜
         // 여기서는 2d 카메라를 쓰지 않을 것이다 그래서 해상도를 이용해 사이즈를 구한뒤 그것을 이용해 앵글을 구할것임
-        // 거리는 원근투영의 nearclipPlane을이용
+        // 거리는 원근투영의 nearclipPlane을이용하거나 직접지정
         var width =Screen.height/(100.0f*2.0f);
         devicex = Screen.width / 2;
         devicey = Screen.height / 2;
-        distance = Camera.main.nearClipPlane;
         // 3D 카메라 fov 맞추기
         var angle = Mathf.Atan(width/distance) * Mathf.Rad2Deg;
         Camera.main.fieldOfView = angle * 2;
         standangle = Camera.main.fieldOfView;
     }
     // Start is called before the first frame update
-    void Start()
-    {
-        buildmodeornot = buildmodeornot.nobuild;
-    }
 
     // Update is called once per frame
     void Update()
@@ -57,7 +53,9 @@ public class player : MonoBehaviour
                 var curTouchBPos = Input.GetTouch(1).position;
                 var deltaDistance = Vector2.Distance(Normalize(curTouchAPos), Normalize(curTouchBPos)) - Vector2.Distance(Normalize(prevTouchAPos), Normalize(prevTouchBPos));
                 Camera.main.fieldOfView -= deltaDistance;
-            }
+                devicex=   2.0f * distance * Mathf.Tan(Camera.main.fieldOfView * 0.5f * Mathf.Deg2Rad);
+                 devicey =  devicex / Camera.main.aspect;
+           }
           
     }
     // 화면의 크기가 핸드폰 마다 다르기 때문에 스크린좌표를 받은뒤 -1과 1의 값으로 정규화
