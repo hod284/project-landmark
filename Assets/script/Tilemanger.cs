@@ -52,8 +52,10 @@ public class Tilemanger : MonoBehaviour
         for (int i = 0; i < child.Length; i++)
         {
             if (child[i].bstate == buildingstate.use)
+            {
+                Destroy(child[i].gameObject);
                 child[i].bstate = buildingstate.notuse;
-            
+            }
         }
     }
     IEnumerator enumerator()

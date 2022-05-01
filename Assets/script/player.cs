@@ -13,8 +13,8 @@ public class player : MonoBehaviour
     float distance;
     float  devicey;
     float standangle;
-
-
+    [HideInInspector]
+    public List<Tile> mroadlist;
     private void Awake()
     {
         //드디어 예전에 2와 3d 카메라를 같이 쓸때 썼던 방식이 생각났다 
@@ -37,25 +37,31 @@ public class player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-            var currentx = Camera.main.transform.transform.localPosition.x > 0 ? Camera.main.transform.transform.localPosition.x + devicex : Camera.main.transform.transform.localPosition.x - devicex;
-            var currenty = Camera.main.transform.transform.localPosition.y > 0 ? Camera.main.transform.transform.localPosition.y + devicey : Camera.main.transform.transform.localPosition.y - devicey;
-            if (Mathf.Abs(limitex) > currentx && -Mathf.Abs(limitex) < currentx && Mathf.Abs(limitey) > currenty && -Mathf.Abs(limitey) < currenty && Input.touchCount == 1)
-            {
-                var moveAmount = new Vector3(Camera.main.transform.localPosition.x + Input.GetTouch(0).deltaPosition.x, Camera.main.transform.localPosition.y + Input.GetTouch(0).deltaPosition.y, Camera.main.transform.localPosition.z);
-                Camera.main.transform.localPosition = Vector3.Lerp(Camera.main.transform.   localPosition, moveAmount, Time.deltaTime / 10.0f);
-            }
-            if (Camera.main.fieldOfView <= standangle && Camera.main.fieldOfView > standangle - 50 && Input.touchCount == 2)
-            {
+        var ray =   Camera.main.ScreenPointToRay(Input.mousePosition);
+        var hit = new RaycastHit();
+        Physics.Raycast(ray, out hit);
+        var tile = new Tile();
+        if (hit.collider.TryGetComponent<Tile>(out tile))
+            hit.collider.GetComponent<Tile>().mroad = monsterroad.use;
+        var currentx = Camera.main.transform.transform.localPosition.x > 0 ? Camera.main.transform.transform.localPosition.x + devicex : Camera.main.transform.transform.localPosition.x - devicex;
+        var currenty = Camera.main.transform.transform.localPosition.y > 0 ? Camera.main.transform.transform.localPosition.y + devicey : Camera.main.transform.transform.localPosition.y - devicey;
+        if (Mathf.Abs(limitex) > currentx && -Mathf.Abs(limitex) < currentx && Mathf.Abs(limitey) > currenty && -Mathf.Abs(limitey) < currenty && Input.touchCount == 1)
+        {
+            var moveAmount = new Vector3(Camera.main.transform.localPosition.x + Input.GetTouch(0).deltaPosition.x, Camera.main.transform.localPosition.y + Input.GetTouch(0).deltaPosition.y, Camera.main.transform.localPosition.z);
+            Camera.main.transform.localPosition = Vector3.Lerp(Camera.main.transform.   localPosition, moveAmount, Time.deltaTime / 10.0f);
+        }
+        if (Camera.main.fieldOfView <= standangle && Camera.main.fieldOfView > standangle - 50 && Input.touchCount == 2)
+        {
 
-                var prevTouchAPos = Input.GetTouch(0).position - Input.GetTouch(0).deltaPosition;
-                var prevTouchBPos = Input.GetTouch(1).position - Input.GetTouch(1).deltaPosition;
-                var curTouchAPos = Input.GetTouch(0).position;
-                var curTouchBPos = Input.GetTouch(1).position;
-                var deltaDistance = Vector2.Distance(Normalize(curTouchAPos), Normalize(curTouchBPos)) - Vector2.Distance(Normalize(prevTouchAPos), Normalize(prevTouchBPos));
-                Camera.main.fieldOfView -= deltaDistance;
-                devicex=   2.0f * distance * Mathf.Tan(Camera.main.fieldOfView * 0.5f * Mathf.Deg2Rad);
-                 devicey =  devicex / Camera.main.aspect;
-           }
+            var prevTouchAPos = Input.GetTouch(0).position - Input.GetTouch(0).deltaPosition;
+            var prevTouchBPos = Input.GetTouch(1).position - Input.GetTouch(1).deltaPosition;
+            var curTouchAPos = Input.GetTouch(0).position;
+            var curTouchBPos = Input.GetTouch(1).position;
+            var deltaDistance = Vector2.Distance(Normalize(curTouchAPos), Normalize(curTouchBPos)) - Vector2.Distance(Normalize(prevTouchAPos), Normalize(prevTouchBPos));
+            Camera.main.fieldOfView -= deltaDistance;
+            devicex=   2.0f * distance * Mathf.Tan(Camera.main.fieldOfView * 0.5f * Mathf.Deg2Rad);
+             devicey =  devicex / Camera.main.aspect;
+       }
           
     }
     // 화면의 크기가 핸드폰 마다 다르기 때문에 스크린좌표를 받은뒤 -1과 1의 값으로 정규화
@@ -65,6 +71,24 @@ public class player : MonoBehaviour
             (position.x - Screen.width * 0.5f) / (Screen.width * 0.5f),
             (position.y - Screen.height * 0.5f) / (Screen.height * 0.5f));
         return normlizedPos;
+    }
+
+    public  void  cancel()
+    {
+        var tilemanger = GameObject.FindObjectOfType<Tilemanger>();
+        var child = tilemanger.GetComponentsInChildren<Tile>();
+        for (int i = 0; i < child.Length; i++)
+            child[i].GetComponent<Tile>().mroad = monsterroad.notuse;
+    }
+    public void ok()
+    {
+        var tilemanger = GameObject.FindObjectOfType<Tilemanger>();
+        var child = tilemanger.GetComponentsInChildren<Tile>();
+        for (int i = 0; i < child.Length; i++)
+        {
+            if(child[i].mroad== monsterroad.use)
+                mroadlist.Add(child[i]);
+        }
     }
 
 }

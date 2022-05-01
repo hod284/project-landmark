@@ -28,13 +28,13 @@ public class towermanger : MonoBehaviour
             var sitechild = GameObject.FindObjectOfType<Tilemanger>().GetComponentsInChildren<Tile>();
             List<Tile> arrayList = new List<Tile>(sitechild);
             var site = arrayList.Find(x => x.transform.position == child.transform.position);
-            var x = 0;
-            int.TryParse(site.gameObject.name[0].ToString(), out x);
-            var z = 0;
-            int.TryParse(site.gameObject.name[1].ToString(), out z);
-            for (int i = x - (int)child.leftx; i < x + (int)child.rightx; i++)
+            var sx = 0;
+            int.TryParse(site.gameObject.name[0].ToString(), out sx);
+            var sz = 0;
+            int.TryParse(site.gameObject.name[1].ToString(), out sz);
+            for (int i = sx - (int)child.leftx; i < sx + (int)child.rightx; i++)
             {
-                for (int j = z - (int)child.leftz; j < z + (int)child.rightz; j++)
+                for (int j = sz - (int)child.leftz; j < sz + (int)child.rightz; j++)
                 {
                     var name = i.ToString() + j.ToString();
                     arrayList.Find(x => x.name == name).bstate = buildingstate.use;
