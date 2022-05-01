@@ -73,22 +73,5 @@ public class player : MonoBehaviour
         return normlizedPos;
     }
 
-    public  void  cancel()
-    {
-        var tilemanger = GameObject.FindObjectOfType<Tilemanger>();
-        var child = tilemanger.GetComponentsInChildren<Tile>();
-        for (int i = 0; i < child.Length; i++)
-            child[i].GetComponent<Tile>().mroad = monsterroad.notuse;
-    }
-    public void ok()
-    {
-        var tilemanger = GameObject.FindObjectOfType<Tilemanger>();
-        var child = tilemanger.GetComponentsInChildren<Tile>();
-        for (int i = 0; i < child.Length; i++)
-        {
-            if(child[i].mroad== monsterroad.use)
-                mroadlist.Add(child[i]);
-        }
-    }
 
 }

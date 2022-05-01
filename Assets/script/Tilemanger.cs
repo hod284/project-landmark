@@ -6,6 +6,7 @@ using Enumspace;
 public class Tilemanger : MonoBehaviour
 {
     public GameObject tilecolider;
+    public GameObject rblock;
     public GameObject block;
     public int xcolidercount;
     public int zcolidercount;
@@ -65,9 +66,14 @@ public class Tilemanger : MonoBehaviour
         {
             if (child[i].mroad == monsterroad.use)
             {
-                Instantiate(block, child[i].transform);
-                yield return  new WaitForSeconds(0.5f);
+                Instantiate(rblock, child[i].transform);
+                GameObject.FindObjectOfType<player>().mroadlist.Add(child[i]);
             }
+            else
+            {
+                Instantiate(block, child[i].transform);
+            }
+            yield return new WaitForSeconds(0.5f);
         }
     }
 }
