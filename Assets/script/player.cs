@@ -15,40 +15,36 @@ public class player : MonoBehaviour
     float standangle;
     [HideInInspector]
     public List<Tile> mroadlist;
+    Ray ray;
     private void Awake()
     {
-        //드디어 예전에 2와 3d 카메라를 같이 쓸때 썼던 방식이 생각났다 
-        // 주로 원근 투영은 3d 직교투영을 2d를 표현한다 그래서 2개의 카메라를 쓰는데 두개의 카메라를 쓸때는 중요한것 두개의 카메라가 가시영역이 교차 해야된다
-        // 안그럼 빈공간이 생겨 ui가 이상하게 나온다 
-        //fov를 맞추어 주어야 하는데 삼각함수에 tan를 구하는 공삭울 이용한다 거리를 밑면 직교투영의 size를 높이로 한다
-        //orthographicSize는 카메라의 사이즈를 절반을표현하기 때문에 먼저 카메라의 크기에 따라 직교투영의 사이즈를 맞춘뒤에 그것을 높이로 이용하여 앵글을 구하면 끜
-        // 여기서는 2d 카메라를 쓰지 않을 것이다 그래서 해상도를 이용해 사이즈를 구한뒤 그것을 이용해 앵글을 구할것임
-        // 거리는 원근투영의 nearclipPlane을이용하거나 직접지정
-        var width =Screen.height/(100.0f*2.0f);
-        devicex = Screen.width / 2;
-        devicey = Screen.height / 2;
-        // 3D 카메라 fov 맞추기
-        var angle = Mathf.Atan(width/distance) * Mathf.Rad2Deg;
-        Camera.main.fieldOfView = angle * 2;
-        standangle = Camera.main.fieldOfView;
+        
+     
     }
     // Start is called before the first frame update
 
     // Update is called once per frame
     void Update()
     {
-        var ray =   Camera.main.ScreenPointToRay(Input.mousePosition);
-        var hit = new RaycastHit();
-        Physics.Raycast(ray, out hit);
-        var tile = new Tile();
-        if (hit.collider.TryGetComponent<Tile>(out tile))
-            hit.collider.GetComponent<Tile>().mroad = monsterroad.use;
-        var currentx = Camera.main.transform.transform.localPosition.x > 0 ? Camera.main.transform.transform.localPosition.x + devicex : Camera.main.transform.transform.localPosition.x - devicex;
-        var currenty = Camera.main.transform.transform.localPosition.y > 0 ? Camera.main.transform.transform.localPosition.y + devicey : Camera.main.transform.transform.localPosition.y - devicey;
-        if (Mathf.Abs(limitex) > currentx && -Mathf.Abs(limitex) < currentx && Mathf.Abs(limitey) > currenty && -Mathf.Abs(limitey) < currenty && Input.touchCount == 1)
+       
+
+#if UNITY_EDITOR_WIN
+
+         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+#elif UNITY_ANDROID
+       
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if(nput.touchCount == 1)
         {
-            var moveAmount = new Vector3(Camera.main.transform.localPosition.x + Input.GetTouch(0).deltaPosition.x, Camera.main.transform.localPosition.y + Input.GetTouch(0).deltaPosition.y, Camera.main.transform.localPosition.z);
-            Camera.main.transform.localPosition = Vector3.Lerp(Camera.main.transform.   localPosition, moveAmount, Time.deltaTime / 10.0f);
+          var currentx = Camera.main.transform.transform.localPosition.x > 0 ? Camera.main.transform.transform.localPosition.x + devicex : Camera.main.transform.transform.localPosition.x - devicex;
+        var currenty = Camera.main.transform.transform.localPosition.y > 0 ? Camera.main.transform.transform.localPosition.y + devicey : Camera.main.transform.transform.localPosition.y - devicey;
+        
+             if (Mathf.Abs(limitex) > currentx && -Mathf.Abs(limitex) < currentx && Mathf.Abs(limitey) > currenty && -Mathf.Abs(limitey) < currenty )
+            {
+                var moveAmount = new Vector3(Camera.main.transform.localPosition.x + Input.GetTouch(0).deltaPosition.x, Camera.main.transform.localPosition.y + Input.GetTouch(0).deltaPosition.y, Camera.main.transform.localPosition.z);
+                Camera.main.transform.localPosition = Vector3.Lerp(Camera.main.transform.localPosition, moveAmount, Time.deltaTime / 10.0f);
+            }
         }
         if (Camera.main.fieldOfView <= standangle && Camera.main.fieldOfView > standangle - 50 && Input.touchCount == 2)
         {
@@ -62,7 +58,12 @@ public class player : MonoBehaviour
             devicex=   2.0f * distance * Mathf.Tan(Camera.main.fieldOfView * 0.5f * Mathf.Deg2Rad);
              devicey =  devicex / Camera.main.aspect;
        }
-          
+#endif
+        var hit = new RaycastHit();
+        Physics.Raycast(ray, out hit);
+        var tile = new Tile();
+        if (hit.collider.TryGetComponent<Tile>(out tile))
+            hit.collider.GetComponent<Tile>().mroad = monsterroad.use;
     }
     // 화면의 크기가 핸드폰 마다 다르기 때문에 스크린좌표를 받은뒤 -1과 1의 값으로 정규화
     private Vector2 Normalize(Vector2 position)

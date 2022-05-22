@@ -5,29 +5,44 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class StartScenesManger : MonoBehaviour
 {
-    public Camera uicamera;
-    public float distance;
     private float degree=0.0f;
     public Slider loadingbar;
-    public float frustumWidth;
-    public float frustumHeight;
-    public GameObject flight;
-    private float movex;
-
+    public GameObject basetile;
+    public GameObject maptile;
 
     private void Awake()
     {
-        int deviceWidth = Screen.width;
-        int deviceHeight = Screen.height;
-        var camera = Camera.main;
-        // UI 카메라 사이즈 맞추기
-        uicamera.orthographicSize = (deviceHeight / (deviceWidth / 16.0F)) / 9.0F;
-        // 3D 카메라 fov 맞추기
-        // 프로스터(절두체 컬링)에대한 카메라 해상도 대응
-        frustumWidth = frustumHeight * camera.aspect;
-        frustumHeight = frustumWidth / camera.aspect;
-        var angle =  Mathf.Atan(frustumHeight * 0.5f / distance) * Mathf.Rad2Deg;
-        camera.fieldOfView = angle * 2;
+        var camerpositionx = 0.0f;
+        var camerpositionz = 0.0f;
+        var x = 0.0f;
+        var z = 0.0f;
+        for (int i = 0; i < 600; i++)
+        {
+            if (i == 0)
+                x = 0.5f;      
+            else
+                x += 1.0f;
+            if (i == 300)
+                camerpositionx = x;
+            for (int j = 0; j < 600; j++)
+            {
+                if (j== 0)
+                    z = 0.5f;
+               else
+                    z += 1.0f;
+
+                if (j == 300)
+                    camerpositionz = z;
+
+                if (i <350  && i > 250 && j < 350 && j > 250)
+                    Instantiate(maptile, new Vector3(x, 0.5f, z), new Quaternion(), transform);
+                 else
+                Instantiate(basetile, new Vector3(x,0,z), new Quaternion(),transform);
+            }
+        }
+
+
+        Camera.main.transform.position = new Vector3(camerpositionx,Camera.main.transform.position.y,camerpositionz);
     }
     private void Start()
     {
@@ -37,10 +52,10 @@ public class StartScenesManger : MonoBehaviour
     private void Update()
     {
         //스카이 박스 돌리기
-        degree += Time.deltaTime/10;
-        if (degree >= 360)
-            degree = 0;
-        RenderSettings.skybox.SetFloat("_Rotation", degree);
+     // degree += Time.deltaTime/10;
+     // if (degree >= 360)
+     //     degree = 0;
+     // RenderSettings.skybox.SetFloat("_Rotation", degree);
         
     }
 

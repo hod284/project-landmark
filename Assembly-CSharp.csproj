@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{C53BC68A-2D56-0B11-4805-2F07D6295DFB}</ProjectGuid>
+    <ProjectGuid>{38C8B432-CE71-630C-D696-FFFAC6B7AD39}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -57,23 +57,29 @@
     <Compile Include="Assets\script\player.cs" />
     <Compile Include="Assets\script\Tilemanger.cs" />
     <Compile Include="Assets\Kovu\EventSystems\Scripts\EventFilter.cs" />
+    <Compile Include="Assets\script\attackmechine.cs" />
+    <Compile Include="Assets\script\wall.cs" />
     <Compile Include="Assets\script\EnumClass.cs" />
     <Compile Include="Assets\Kovu\CameraSystems\Scripts\CameraController.cs" />
     <Compile Include="Assets\Kovu\EventSystems\Scripts\PointerEventTrigger.cs" />
+    <Compile Include="Assets\script\monster.cs" />
+    <Compile Include="Assets\script\Tile.cs" />
+    <Compile Include="Assets\script\bullet.cs" />
     <Compile Include="Assets\script\UIscript.cs" />
+    <Compile Include="Assets\script\BuildingInformation.cs" />
     <Compile Include="Assets\Kovu\CameraSystems\Scripts\Focuser.cs" />
     <Compile Include="Assets\Kovu\EventSystems\Scripts\ButtonEventFilter.cs" />
-    <Compile Include="Assets\script\building.cs" />
-    <Compile Include="Assets\script\Start\StartScenesManger.cs" />
+    <Compile Include="Assets\script\towermanger.cs" />
+    <Compile Include="Assets\script\StartScenesManger.cs" />
     <Compile Include="Assets\Kovu\EventSystems\Scripts\ButtonMask.cs" />
     <Compile Include="Assets\script\SaveandLoadManger.cs" />
     <Compile Include="Assets\Kovu\EventSystems\Scripts\DefaultDictionary.cs" />
+    <Compile Include="Assets\script\Cameracontrol.cs" />
     <Compile Include="Assets\Kovu\EventSystems\Scripts\PointerControlPanel.cs" />
-    <Compile Include="Assets\script\Tile.cs" />
-    <Compile Include="Assets\script\BuildingInformation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
+    <None Include="Assets\License.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
